@@ -57,8 +57,10 @@ async function createItems() {
         let text = document.createElement('p');
         let img = document.createElement('img');
         img.src = item.Picture;
-        img.style.maxWidth = "70%";
-        img.style.maxHeight = "50vh";
+        img.onerror = function() {
+            img.src = "no.png";
+        };
+        img.style.width = "70%";
         let location =  getLocation("LS");
         text.innerHTML = "STUDENT: " + item.Name + "<br>" +
         "CLASS: " + item.Class + "<br><br>" +
@@ -132,8 +134,6 @@ async function getLocation(Campus){
     }else{
         return "YOU ARE NOT ON THE RIGHT CAMPUS";
     }
-
-
 
 }
 
