@@ -1,0 +1,92 @@
+﻿#Welcome_Text
+{
+    text-align: center;
+    margin-top: 15vh;
+    font-size: 8vw;
+    max-font-size: 7vh;
+    min-font-size: 2vh;
+    color: #000000;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+}
+
+html{
+    overflow: hidden;
+}
+
+
+.item{
+    scroll-snap-align: center;
+}
+#SVDB_Logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 85vw;
+    height: auto;
+    margin-top: 13vh;
+}
+#SVDB_Text{
+    margin-top: 1vh;
+    text-align: center;
+    font-size: 8vw;
+    color: #000000;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+}
+#Search_Button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4vh;
+    width: 35vw;
+    height: 6vh;
+    font-size: 7vw;
+    color: #000000;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    border: 2px solid #FFFFFF;
+}
+
+.button:active{
+    background-color: #000000;
+    color: #FFFFFF;
+    box-shadow: 0 5px #666;
+    transition: ease-in-out 0.05s;
+    transform: translateY(4px);
+
+}
+
+#Search_Box{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.7vh;
+    width: 75vw;
+    height: 6vh;
+    font-size: 4.75vw;
+    text-align: center;
+    border: 3px solid #999999;
+
+}
+
+#Search_Box::placeholder{
+    text-align: center;
+}
+#About_Button{
+    position: absolute;
+    bottom: 0;
+    left: 50vw;
+    transform: translateX(-50%);
+    width: 35vw;
+    height: 6vh;
+    font-size: 7vw;
+    color: #000000;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    background-color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+}
+

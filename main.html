@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>STABVirtualDatabase</title>
+        <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore-compat.js"></script>
+
+    </head>
+    <link rel="stylesheet" href="main.css">
+    <body>
+        <script src = "./main.js" type="module">
+                import{Search} from './main.js';
+                window.Search = Search;
+        </script>
+        <div class = "Welcome_Page" id="Content">
+        <h1 id="Welcome_Text">
+            Welcome!
+        </h1>
+        <img id="SVDB_Logo" src="SVDB.jpg" alt="">
+        <p id="SVDB_Text">Saints Virtual Database</p>
+        </div>
+        <div class = "Search" id="Search">
+        <button class= "button" id="Search_Button" onclick = "Search()">Search</button>
+            <label for="Search_Box"></label>
+            <input id="Search_Box" type="text" placeholder="Student, Medium, Grade, Course">
+        </div>
+        <div class = "About" id="About">
+        <button class= "button" id="About_Button">About</button>
+        </div>
+        <script type="module">
+            import{Search} from './main.js';
+            window.Search = Search;
+        </script>
+
+    </body>
+
+
+</html>
