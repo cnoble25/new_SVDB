@@ -53,7 +53,7 @@ async function createItems(text) {
 
 
     data.forEach(item => {
-        if((item.Name).includes(text) || (item.Class).includes(text) || (item.Year).includes(text)){
+        if((item.Name.toLowerCase()).includes(text.toLowerCase()) || (item.Class.toLowerCase()).includes(text.toLowerCase()) || (item.Year.toLowerCase()).includes(text.toLowerCase())){
             let itemDiv = document.createElement('div');
             let text = document.createElement('p');
             let img = document.createElement('img');
