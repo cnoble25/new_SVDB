@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
-// hiii
+// hiiii
 const firebaseConfig = {
     apiKey: "AIzaSyBVDRI-vHvyCDbCuKXuP3ZW-N4fCBWCrfA",
     authDomain: "svdb-26aa4.firebaseapp.com",
