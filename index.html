@@ -9,10 +9,6 @@
     </head>
     <link rel="stylesheet" href="main.css">
     <body>
-        <script src = "./main.js" type="module">
-                import{Search} from './main.js';
-                window.Search = Search;
-        </script>
         <div class = "Welcome_Page" id="Content">
         <h1 id="Welcome_Text">
             Welcome!
@@ -21,9 +17,9 @@
         <p id="SVDB_Text">Saints Virtual Database</p>
         </div>
         <div class = "Search" id="Search">
-        <button class= "button" id="Search_Button" onclick = "Search()">Search</button>
+        <button class= "button" id="Search_Button" onclick = "Search(document.getElementById('Search_Box').value)">Search</button>
             <label for="Search_Box"></label>
-            <input id="Search_Box" type="text" placeholder="Student, Medium, Grade, Course">
+            <input id="Search_Box" type="text" placeholder="Student, Year, Course">
         </div>
         <div class = "About" id="About">
         <button class= "button" id="About_Button">About</button>

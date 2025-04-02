@@ -32,7 +32,8 @@ async function readDatabase() {
                 Class: item.data().Class,
                 Room: item.data().Room,
                 Name: item.data().Name,
-                Picture: item.data().Picture
+                Picture: item.data().Picture,
+                Year: item.data().Year
             });
         });
 
@@ -45,43 +46,44 @@ async function readDatabase() {
 
 readDatabase();
 
-async function createItems() {
+async function createItems(text) {
     const data = JSON.parse(sessionStorage.getItem("Art"));
     let arr = [];
-    let img = document.createElement('img');
 
 
 
     data.forEach(item => {
-        let itemDiv = document.createElement('div');
-        let text = document.createElement('p');
-        let img = document.createElement('img');
-        img.src = item.Picture;
-        img.onerror = function() {
-            img.src = "no.png";
-        };
-        img.style.width = "70%";
-        let location =  getLocation("LS");
-        text.innerHTML = "STUDENT: " + item.Name + "<br>" +
-        "CLASS: " + item.Class + "<br><br>" +
-        "LOCATION PROXIMITY: " + item.Room +"<br>" +
-        location;
-        text.style.fontSize = "2vh";
-        text.style.fontFamily = "Arial, sans-serif";
-        text.style.fontWeight = "bold";
-        itemDiv.className = "item";
-        itemDiv.appendChild(img);
-        itemDiv.appendChild(text);
-        itemDiv.style.height = "100%";
-        itemDiv.style.width = "100%";
-        itemDiv.style.scrollSnapAlign = "start";
-        itemDiv.style.overflow = "hidden";
-        arr.push(itemDiv);
+        if((item.Name).includes(text) || (item.Class).includes(text) || (item.Year).includes(text)){
+            let itemDiv = document.createElement('div');
+            let text = document.createElement('p');
+            let img = document.createElement('img');
+            img.src = item.Picture;
+            img.onerror = function () {
+                img.src = "no.png";
+            };
+            img.style.width = "70%";
+            let location = getLocation("LS");
+            text.innerHTML = "STUDENT: " + item.Name + "<br>" +
+                "CLASS: " + item.Class + "<br><br>" +
+                "LOCATION PROXIMITY: " + item.Room + "<br>" +
+                location;
+            text.style.fontSize = "2vh";
+            text.style.fontFamily = "Arial, sans-serif";
+            text.style.fontWeight = "bold";
+            itemDiv.className = "item";
+            itemDiv.appendChild(img);
+            itemDiv.appendChild(text);
+            itemDiv.style.height = "100%";
+            itemDiv.style.width = "100%";
+            itemDiv.style.scrollSnapAlign = "start";
+            itemDiv.style.overflow = "hidden";
+            arr.push(itemDiv);
+        }
         });
         return arr;
 }
 
-export async function Search() {
+export async function Search(text) {
     about.style.display = "none";
     content.innerHTML = "";
     search.style.position = "absolute";
@@ -108,7 +110,7 @@ export async function Search() {
     items.style.height = "70vh";
     items.style.scrollSnapType = "y mandatory";
 
-    let arr = await createItems();
+    let arr = await createItems(text);
     arr.forEach(item => {
         items.appendChild(item);
     });

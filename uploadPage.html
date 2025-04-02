@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<!-- this is just some html to make a basic upload page that has a file chooser and upload button -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>St. Anne's-Belfield All-School Visual Art Show</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore-compat.js"></script>
+</head>
+<script type="module" src="script.js">
+
+
+</script>
+
+<script type="module">
+    import{importCSVToDatabase} from './script.js'
+    window.importCSVToDatabase = importCSVToDatabase;
+</script>
+<!-- adding the button that allowing inputing multiple files -->
+<input type="file" id="URL" multiple="multiple" onchange="createFileNameList()">
+<ul id="fileList"></ul>
+<!-- showing the files name using texts -->
+<script>
+
+    function hash(string) {
+        const utf8 = new TextEncoder().encode(string);
+        return crypto.subtle.digest('SHA-256', utf8).then((hashBuffer) => {
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray
+                .map((bytes) => bytes.toString(16).padStart(2, '0'))
+                .join('');
+            return hashHex;
+        });
+
+    }
+
+    async function thing(numattemps){
+        if(numattemps > 0){
+            password = prompt("enter password", "")
+            hash(password).then((hex) => {
+                hash(hex).then((hexx) => {
+                    if(hexx == "68601884b61273a5b3fc4d9a9414769a7f84fb596d53e6e4ac51d9805fd7fec8"){
+
+                    }else{
+                        thing(--numattemps);
+                    }
+                })
+            });
+        }else{
+            alert("you have reached the limit on number of attempts");
+            location.replace("index.html");
+        }
+    }
+
+
+
+    function createFileNameList() {
+        var input = document.getElementById("URL");
+        var ul = document.getElementById("fileList");
+        while (ul.firstChild) {
+            ul.removeChild(ul.firstChild);
+        }
+        for (var i = 0; i < input.files.length; i++) {
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(input.files[i].name));
+            ul.appendChild(li);
+        }
+    }
+    //gives a maximum amount of password tries before not allowing them to go further
+    async function checkSecurity(limit) {
+        if (limit > 0){
+            let password = prompt("please enter password", "");
+            if (password != "1111"){
+                checkSecurity(limit-1);
+            }else{
+
+            }
+
+        }else{
+            alert("you have reached the limit on number of attempts");
+            location.replace("index.html");
+        }
+    }
+    thing(10);
+    // checkSecurity(10);
+</script>
+<!-- adding the button that uploading to the firebase -->
+<button onclick="importCSVToDatabase()">upload file</button>
+</html>
