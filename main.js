@@ -20,6 +20,18 @@ let about = document.getElementById('About');
 const initial_content = content.innerHTML;
 const initial_search = search.innerHTML;
 const initial_about = about.innerHTML;
+const initial_search_style = search.style;
+const initial_content_style = content.style;
+const initial_about_style = about.style;
+
+export function reset(){
+    content.innerHTML = initial_content;
+    search.innerHTML = initial_search;
+    about.innerHTML = initial_about;
+    search.style = initial_search_style;
+    content.style = initial_content_style;
+    about.style = initial_about_style;
+}
 
 async function readDatabase() {
     try {
@@ -33,7 +45,8 @@ async function readDatabase() {
                 Room: item.data().Room,
                 Name: item.data().Name,
                 Picture: item.data().Picture,
-                Year: item.data().Year
+                Year: item.data().Year,
+                Campus: item.data().Campus
             });
         });
 
@@ -52,7 +65,7 @@ async function createItems(text) {
 
 
 
-    data.forEach(item => {
+    await data.forEach(async (item) => {
         if((item.Name.toLowerCase()).includes(text.toLowerCase()) || (item.Class.toLowerCase()).includes(text.toLowerCase()) || (item.Year.toLowerCase()).includes(text.toLowerCase())){
             let itemDiv = document.createElement('div');
             let text = document.createElement('p');
@@ -62,7 +75,7 @@ async function createItems(text) {
                 img.src = "no.png";
             };
             img.style.width = "70%";
-            let location = getLocation("LS");
+            let location = await getLocation(item.Campus);
             text.innerHTML = "STUDENT: " + item.Name + "<br>" +
                 "CLASS: " + item.Class + "<br><br>" +
                 "LOCATION PROXIMITY: " + item.Room + "<br>" +
@@ -96,6 +109,9 @@ export async function Search(text) {
 
     let SVDB_image = document.createElement('img');
     SVDB_image.src = "SVDB.jpg";
+    SVDB_image.onclick = function () {
+        reset();
+    }
     SVDB_image.style.width = "30vw";
     SVDB_image.style.marginTop = "3vh";
     content.appendChild(SVDB_image);
@@ -121,17 +137,17 @@ export async function Search(text) {
 
 async function getLocation(Campus){
 
-    await navigator.geolocation.getCurrentPosition( successCallback, errorCallback);
+    await navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
     let latitude =  sessionStorage.getItem("Latitude");
     let longitude =  sessionStorage.getItem("Longitude");
     //current campus is just to tell which campus the person is on 1 means lower school 2 means highschool
-    let currentCampus = null;
+    let currentCampus = "";
     if(latitude > 38.05 && longitude < -78.518){
-        currentCampus = "LS";
+        currentCampus = "BEL";
     }else if(latitude < 38.05 && longitude > -78.518){
-        currentCampus = "US";
+        currentCampus = "GR";
     }
-    if(currentCampus == Campus) {
+    if(currentCampus.toLowerCase().includes(Campus.toLowerCase())) {
         return "YOU ARE ON THE RIGHT CAMPUS";
     }else{
         return "YOU ARE NOT ON THE RIGHT CAMPUS";
@@ -139,9 +155,10 @@ async function getLocation(Campus){
 
 }
 
-function successCallback(position) {
-    let latitude = position.coords.latitude;
-    let longitude = position.coords.longitude;
+async function successCallback(position) {
+    let latitude = await position.coords.latitude;
+    let longitude = await position.coords.longitude;
+    console.log(latitude + ", " + longitude);
     longitude = longitude.toPrecision(5);
     latitude = latitude.toPrecision(5);
     sessionStorage.setItem("Latitude", latitude);
