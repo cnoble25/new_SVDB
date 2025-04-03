@@ -77,7 +77,7 @@ async function createItems(text) {
             img.style.width = "70%";
             let location = await getLocation(item.Campus);
             text.innerHTML = "STUDENT: " + item.Name + "<br>" +
-                "CLASS: " + item.Class + "<br><br>" +
+                "Course: " + item.Class + "<br><br>" +
                 "LOCATION PROXIMITY: " + item.Room + "<br>" +
                 location;
             text.style.fontSize = "2vh";
