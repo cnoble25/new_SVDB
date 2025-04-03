@@ -46,7 +46,8 @@ async function readDatabase() {
                 Name: item.data().Name,
                 Picture: item.data().Picture,
                 Year: item.data().Year,
-                Campus: item.data().Campus
+                Campus: item.data().Campus,
+                Building: item.data().Building
             });
         });
 
@@ -78,7 +79,7 @@ async function createItems(text) {
             let location = await getLocation(item.Campus);
             text.innerHTML = "STUDENT: " + item.Name + "<br>" +
                 "Course: " + item.Class + "<br><br>" +
-                "LOCATION PROXIMITY: " + item.Room + "<br>" +
+                "LOCATION PROXIMITY: " + item.Campus + ", " + item.Building + ", " + item.Room + "<br>" +
                 location;
             text.style.fontSize = "2vh";
             text.style.fontFamily = "Arial, sans-serif";
