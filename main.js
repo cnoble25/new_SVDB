@@ -180,3 +180,12 @@ function errorCallback(error) {
             break;
     }
 }
+
+document.getElementById("Search_Box").addEventListener("keypress", function(event){
+    if(event.key == "Enter"){
+        Search(document.getElementById("Search_Box").value);
+    }
+    if (event.keyCode === 13) {
+        displayStudentSearchData();
+    }
+});
